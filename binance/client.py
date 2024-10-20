@@ -43,6 +43,7 @@ class BaseClient:
     MARGIN_API_VERSION4 = 'v4'
     FUTURES_API_VERSION = 'v1'
     FUTURES_API_VERSION2 = 'v2'
+    FUTURES_API_VERSION3 = 'v3'
     OPTIONS_API_VERSION = 'v1'
 
     BASE_ENDPOINT_DEFAULT = ''
@@ -226,7 +227,7 @@ class BaseClient:
         url = self.FUTURES_URL
         if self.testnet:
             url = self.FUTURES_TESTNET_URL
-        options = {1: self.FUTURES_API_VERSION, 2: self.FUTURES_API_VERSION2}
+        options = {1: self.FUTURES_API_VERSION, 2: self.FUTURES_API_VERSION2, 3: self.FUTURES_API_VERSION3}
         return url + '/' + options[version] + '/' + path
 
     def _create_futures_data_api_uri(self, path: str) -> str:
@@ -7469,7 +7470,7 @@ class Client(BaseClient):
         https://binance-docs.github.io/apidocs/futures/en/#position-information-user_data
 
         """
-        return self._request_futures_api('get', 'positionRisk', True, 2, data=params)
+        return self._request_futures_api('get', 'positionRisk', True, 3, data=params)
 
     def futures_account_trades(self, **params):
         """Get trades for the authenticated account and symbol.
